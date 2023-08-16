@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(231, 228, 228);
+}
+#login-form{
+    background-color: white;
+    width: 80%;
+    padding:30px;
+    border: solid grey;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px grey;
+}
+#login-form > *{
+    padding: 10px;
+}

@@ -1,0 +1,14 @@
+body{
+    background-color: grey;
+}
+ul{
+    transition-property: opacity;
+    transition-duration: 1s;
+}
+ul:hover{
+    opacity: 0;
+}
+
+
+
+

@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: grey;
+}
+.text-red{
+    color: red;
+}
+.text-blue{
+    color: blue;
+}
+h1{
+    transition-property: color;
+    transition-duration: 0.2s;
+}
