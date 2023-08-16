@@ -3,7 +3,9 @@
 }
 body{
     background-color: rgb(231, 228, 228);
+    
 }
+
 #login-form{
     background-color: white;
     width: 80%;
@@ -15,7 +17,39 @@ body{
     margin: auto;
     border-radius: 10px;
     box-shadow: 1px 1px 10px grey;
+    transition: all 1s;
 }
 #login-form > *{
     padding: 10px;
+}
+
+.alert_msg{
+    margin: auto;
+    font-size: 1.2rem;
+    height: 50px;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+}
+tr > td{
+    padding: 20px;
+    border: 1px solid black;
+}
+tr:nth-child(odd){
+    background-color: white;
+}
+/* Class to be added */
+.disableInput{
+    pointer-events: none
+}
+
+.sucess_ful_login{
+    color: green;
+
+}
+.fail_login{
+    color: red;
+
 }
