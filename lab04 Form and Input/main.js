@@ -75,7 +75,7 @@ function addRowtoLoginHistory(arr_login) {
 
 ///////////////////////// Combining Functions /////////////////////////////
 
-const hdlSubmit = (e)=> {
+const hdlSubmit = (e,displayFN,failCheckFN,addRow)=> {
 
   e.preventDefault();/*Note(0)*/ 
 
@@ -90,16 +90,16 @@ const hdlSubmit = (e)=> {
 
   if (foundIndex != -1) {
     loginPackInfo.push(inp1.value, inp2.value, "Success");
-    displayLoginResult(output, foundIndex);
+    displayFN(output, foundIndex);
   } 
   else {
     loginPackInfo.push(inp1.value, inp2.value, "Failed");
-    displayLoginResult(output, foundIndex);
+    displayFN(output, foundIndex);
   }
 
-  failCountCheck(fail_login_count);
+  failCheckFN(fail_login_count);
 
-  addRowtoLoginHistory(loginPackInfo);
+  addRow(loginPackInfo);
 };
 
 
@@ -107,7 +107,8 @@ const hdlSubmit = (e)=> {
 
 ///////////////////////// Adding the function to Event Listener /////////////////////////////
 
-loginForm.addEventListener("submit", hdlSubmit);
+loginForm.addEventListener("submit", (event) => {
+  hdlSubmit(event,displayLoginResult,failCountCheck,addRowtoLoginHistory)});
 
 
 // This means the event listner; submit (for forms) when press submit it will run hdlSubmit

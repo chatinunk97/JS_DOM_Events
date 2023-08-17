@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+header {
+  padding: 0.5rem;
+  width: 40rem;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sort-btn {
+  font-size: 1.5rem;
+  padding-inline: 8px;
+  border: none;
+  box-shadow: 4px 4px 8px #999;
+}
+.sort-btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 4px;
+  left: 4px;
+}
+main {
+  padding: 2rem 1rem;
+  width: 40rem;
+  min-width: 400px;
+  background: violet;
+  margin:  auto;
+}
+
+.job-list {
+  display: flex;
+  /* This will make the item align in the same line  */
+  flex-direction: column-reverse;
+  transition: 0.5s;
+}
+.job-form{
+  display: flex;
+  gap: 2px;
+  margin-bottom: 1rem;
+}
+
+.job-form > *:first-child {
+  flex-grow: 1;
+  padding: 0.5rem 0.2rem;
+  font-size: 1.2rem;
+}
+
+.job-form > *:not(:first-child) {
+  padding-inline: 0.5rem;
+}
+.job-item {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 0.1rem;
+}
+.job-item > *:first-child {
+  flex: 1;
+  padding: 0.5rem 0.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.job-item > *:not(:first-child) {
+  padding-inline: 0.5rem;
+}
+
+.done {
+  color: lime;
+  text-decoration: line-through;
+}
+
+.undone{
+  color: black;
+}
+.job-item >.editmode {
+  cursor: auto;
+  background: deeppink;
+  color: whitesmoke;
+}

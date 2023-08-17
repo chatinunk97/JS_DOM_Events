@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Lato", sans-serif;
+}
+.sidenav {
+  height: 100%;
+  width: 0px;
+  /* Change width to 0px so it would not display on the web when hide */
+  position: fixed;
+  /* Does not move when scroll */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: #eee;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.4s;
+}
+
+.sidenav a {
+  display: block;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  color: deeppink;
+  font-size: 25px;
+  transition: 0.3s;
+}
+.sidenav a:hover {
+  color: lime;
+  background: #fff;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* This makes the main div move smoothly to the right 
+  padding is just to make some space */
+
+#main {
+  transition: margin-left 0.4s;
+  padding: 16px;
+}
+
+
+
+/* You can try hovering it and it will move, make space for the Nav Bar */
+/* #main:hover{
+    margin-left: 250px;
+  } */
