@@ -8,36 +8,40 @@ const users = [
 
 let inp1 = document.querySelector('#username')
 let inp2 = document.querySelector('#password')
+
 let loginForm = document.querySelector('#login-form')
+
 let output = document.querySelector('.output')
 let table = document.querySelector('table')
 
 
 let fail_login_count = 0;
-const hdlSubmit = (e,addrow) => {
+const hdlSubmit = (e) => {
 
-
+    //This prevent the webpage from refreshing after clicking Submit
     e.preventDefault()
+
     foundIndex = users.findIndex((item) => item['user'] === inp1.value &&
         item['password'] === +inp2.value)
         // The reason why this inp2 is the only one with + is
         // It's for comparing checking matters other places are just string to be put in the table
+
     loginPackInfo = [];
 
     if (foundIndex != -1) {
         loginPackInfo.push(inp1.value,inp2.value,"Success")
         // Creating a new display message and assigning classes to that element
         newdisplay = document.createElement('h1')
+        
         newdisplay.innerText = 'Login Successful !'
-        newdisplay.classList = ('sucess_ful_login')
+        newdisplay.classList.add('sucess_ful_login')
         output.appendChild(newdisplay)
 
 
         loginForm.classList.add('disableInput')
         setTimeout(() => {
-            // Delete the whole element after displayed
-            newdisplay.remove();
-            loginForm.classList.remove('disableInput');
+            //Add opacity + transition duration to the element but not yet deleted
+            newdisplay.classList.add('opacity')
         }, 3000);
     }
     else {
@@ -45,15 +49,14 @@ const hdlSubmit = (e,addrow) => {
 
         newdisplay = document.createElement('h1')
         newdisplay.innerText = 'Failed Login !'
-        newdisplay.classList = ('fail_login')
+        newdisplay.classList.add('fail_login')
         output.appendChild(newdisplay)
 
 
         loginForm.classList.add('disableInput')
         fail_login_count++
         setTimeout(() => {
-            newdisplay.remove();
-            loginForm.classList.remove('disableInput');
+            newdisplay.classList.add('opacity')
         }, 3000);//(1)setTimeout does not stop the whole webpage
 
     }
@@ -63,6 +66,12 @@ const hdlSubmit = (e,addrow) => {
             loginForm.classList.add('disableInput')
         }, 3000)
     }
+
+    // Remove the element completely, at this state it's opacity 0 but we need to remove it to make space for the next display text
+    setTimeout(() => {
+        newdisplay.remove()
+        loginForm.classList.remove('disableInput');
+    }, 4000);
     addRow(loginPackInfo)
 }
 
