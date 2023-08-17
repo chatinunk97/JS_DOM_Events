@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 50px;
+    border: black solid 1px;
+}
+main{
+    padding-left: 15px;
+    padding: 10px;
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+}
+nav {
+    background-color:dodgerblue;
+    display: flex;
+    height: 100%;
+    width: 0px;
+    z-index: 1;
+    position: fixed;
+    overflow: hidden; /*This make the list inside disappear when the width is set to 0px*/
+    left: 0;
+    top: 0;
+    display: flex;
+    transition-property: width;
+    transition-duration: 0.5s;
+    padding: 0px;
+}
+
+ul{
+    /* background-color: red; */
+    width: 100%;
+}
+li:first-child{
+    font-size: 2rem;
+    padding: 0px;
+}
+li {
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(22, 123, 225) ;
+    min-width: 100px;
+    
+}
+li a {
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+    
+}
+li:hover{
+    background-color: rgb(22, 123, 225);
+}
+
+.testFlex{
+    background-color: blue;
+    margin: auto;
+    /* display: inline-block; */
+    color: red;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+}
+.testFlex div{
+    background-color: white;
+    border-radius: 5px;
+    flex-grow: 1;
+    transition: flex 1s;
+}
+.testFlex div:first-child{
+    color: green;
+    flex-grow: 0.5;
+}
