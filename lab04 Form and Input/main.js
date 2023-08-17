@@ -1,103 +1,122 @@
 const users = [
-    { user: 'Andy', password: 1234 },
-    { user: 'Bobby', password: 1234 },
-    { user: 'Candy', password: 1234 },
-    { user: 'Danny', password: 1234 },
-]
+  { user: "Andy", password: 1234 },
+  { user: "Bobby", password: 1234 },
+  { user: "Candy", password: 1234 },
+  { user: "Danny", password: 1234 },
+];
+/////////////////////////////////
 
+let inp1 = document.querySelector("#username");
+let inp2 = document.querySelector("#password");
+let submitbt = document.querySelector('#submit')
 
-let inp1 = document.querySelector('#username')
-let inp2 = document.querySelector('#password')
+let loginForm = document.querySelector("#login-form");
 
-let loginForm = document.querySelector('#login-form')
-
-let output = document.querySelector('.output')
-let table = document.querySelector('table')
-
+let output = document.querySelector(".output");
+let table = document.querySelector("table");
 
 let fail_login_count = 0;
-const hdlSubmit = (e) => {
 
-    //This prevent the webpage from refreshing after clicking Submit
-    e.preventDefault()
+///////////////////////////////// Sub Functions ////////////////////////////////
 
-    foundIndex = users.findIndex((item) => item['user'] === inp1.value &&
-        item['password'] === +inp2.value)
-        // The reason why this inp2 is the only one with + is
-        // It's for comparing checking matters other places are just string to be put in the table
 
-    loginPackInfo = [];
-
+function displayLoginResult(output, foundIndex) {
+    // Creating a new display message and assigning classes to that element
+    newdisplay = document.createElement("h1");
+  
     if (foundIndex != -1) {
-        loginPackInfo.push(inp1.value,inp2.value,"Success")
-        // Creating a new display message and assigning classes to that element
-        newdisplay = document.createElement('h1')
-        
-        newdisplay.innerText = 'Login Successful !'
-        newdisplay.classList.add('sucess_ful_login')
-        output.appendChild(newdisplay)
-
-
-        loginForm.classList.add('disableInput')
-        setTimeout(() => {
-            //Add opacity + transition duration to the element but not yet deleted
-            newdisplay.classList.add('opacity')
-        }, 3000);
+      newdisplay.innerText = "Login Successful !";
+      newdisplay.classList.add("sucess_ful_login");
+    } else {
+      newdisplay.innerText = "Failed Login !";
+      newdisplay.classList.add("fail_login");
     }
-    else {
-        loginPackInfo.push(inp1.value,inp2.value,"Failed")
-
-        newdisplay = document.createElement('h1')
-        newdisplay.innerText = 'Failed Login !'
-        newdisplay.classList.add('fail_login')
-        output.appendChild(newdisplay)
-
-
-        loginForm.classList.add('disableInput')
-        fail_login_count++
-        setTimeout(() => {
-            newdisplay.classList.add('opacity')
-        }, 3000);//(1)setTimeout does not stop the whole webpage
-
-    }
-    if (fail_login_count >= 3) {
-        //(2) So I have to set this to delay as well or else it will add first and then got remove from the top classList.remove()
-        setTimeout(() => {
-            loginForm.classList.add('disableInput')
-        }, 3000)
-    }
-
-    // Remove the element completely, at this state it's opacity 0 but we need to remove it to make space for the next display text
+  
+    //Alternative way for coloring is to just put in output.style.color="green" this also works
+    output.appendChild(newdisplay);
+    submitbt.setAttribute('disabled',"") 
+    loginForm.classList.add("disableInput");
     setTimeout(() => {
-        newdisplay.remove()
-        loginForm.classList.remove('disableInput');
-    }, 4000);
-    addRow(loginPackInfo)
+      //Add opacity + transition duration to the element but not yet deleted
+      newdisplay.classList.add("opacity");
+    }, 3000);
+  }
+
+function failCountCheck(fail_count) {
+  if (fail_count >= 3) {
+    setTimeout(() => {
+      loginForm.classList.add("disableInput");
+    }, 3000);
+    return;
+  }
+  setTimeout(() => {
+    newdisplay.remove();
+    loginForm.classList.remove("disableInput");
+    submitbt.removeAttribute('disabled') 
+  }, 4000);
 }
 
-
-
-function addRow(arr_login){
-    newtr = document.createElement('tr')
-    table.appendChild(newtr)
-    for(i=0; i<3 ; i++){
-        newtd = document.createElement('td')
-        newtd.innerText = arr_login[i];
-        if(arr_login[i]== 'Success'){
-            newtd.classList.add('sucess_ful_login')
-        }
-        else if(arr_login[i]== 'Failed'){
-            newtd.classList.add('fail_login')
-        }
-        newtr.appendChild(newtd)
+function addRowtoLoginHistory(arr_login) {
+    newtr = document.createElement("tr");
+    table.appendChild(newtr);
+    for (i = 0; i < 3; i++) {
+      newtd = document.createElement("td");
+      newtd.innerText = arr_login[i];
+      if (arr_login[i] == "Success") {
+        newtd.classList.add("sucess_ful_login");
+      } else if (arr_login[i] == "Failed") {
+        newtd.classList.add("fail_login");
+      }
+      newtr.appendChild(newtd);
     }
-}
+  }
 
 
-loginForm.addEventListener('submit', hdlSubmit)
+
+///////////////////////// Combining Functions /////////////////////////////
+
+const hdlSubmit = (e)=> {
+
+  e.preventDefault();/*Note(0)*/ 
+
+  //############## Validate User ##############//
+  foundIndex = users.findIndex(
+    (item) => item["user"] === inp1.value && item["password"] === +inp2.value//Note(1)
+  );
+
+
+  loginPackInfo = [];
+
+
+  if (foundIndex != -1) {
+    loginPackInfo.push(inp1.value, inp2.value, "Success");
+    displayLoginResult(output, foundIndex);
+  } 
+  else {
+    loginPackInfo.push(inp1.value, inp2.value, "Failed");
+    displayLoginResult(output, foundIndex);
+  }
+
+  failCountCheck(fail_login_count);
+
+  addRowtoLoginHistory(loginPackInfo);
+};
+
+
+
+
+///////////////////////// Adding the function to Event Listener /////////////////////////////
+
+loginForm.addEventListener("submit", hdlSubmit);
+
+
 // This means the event listner; submit (for forms) when press submit it will run hdlSubmit
 //So basically we write everything to put it all here
 
-
 // Question if we use the above pattern can we parse in a function as an argument ?
 //like hdlSubmit(fn,fn2)
+
+
+//Note (0) //This prevent the webpage from refreshing after clicking Submit
+//Note (1)  // The reason why this inp2 is the only one with + is It's for comparing checking matters other places are just string to be put in the table
+//Notes(2) So I have to set this to delay as well or else it will add first and then got remove from the top classList.remove()
