@@ -1,4 +1,4 @@
-// Navbar
+////////////////////// Navbar //////////////////////////////
 let navOpen = document.querySelector(".navOpen")
 let navBar = document.querySelector("nav")
 let mainDiv = document.querySelector('main')
@@ -23,7 +23,7 @@ navClose.addEventListener("click", (event) => {
 })
 
 
-// Flex Changing
+////////////////////////// Flex Changing //////////////////////////
 let flexChange = document.querySelector(".flexChange")
 flexGrow = false
 flexChange.addEventListener('click', (event) => {
@@ -39,7 +39,7 @@ flexChange.addEventListener('click', (event) => {
 })
 
 
-//Input Detecting
+////////////////////Input Detecting////////////////////
 let inputTab = document.querySelector("#userInput")
 let displaySearch = document.querySelector('#displaySearch')
 
@@ -53,7 +53,8 @@ const stock = [
 ]
 
 
-inputTab.addEventListener('keyup', (e) => {
+inputTab.addEventListener('input', (e) => {
+    displaySearch.classList.add("foundSearch")
     if (inputTab.value.length > 5) {
         foundIndex = stock.findIndex((object) => object['productCode'] == inputTab.value)
         foundProductName = stock[foundIndex]?.['productName']
@@ -63,9 +64,11 @@ inputTab.addEventListener('keyup', (e) => {
         }
         else {
             displaySearch.innerText = "Not Found"
+            
         }
     }
     else {
+        displaySearch.classList.remove("foundSearch")
         displaySearch.innerText = "";
     }
 })
